@@ -23,6 +23,7 @@ const bcrypt = require('bcrypt');
 
 // Include the express router. 
 const utilities = require('./api/utilities');
+const dbConnect = require('./dbConnect');
 
 const port = process.env.PORT || 5000
 
@@ -90,6 +91,7 @@ app.get('/login', function(req, res) {
 
 // Makes Express use a router called utilities
 app.use('/api/', utilities);
+app.use('/', dbConnect);
 
 // function to return the 404 message and error to client
 app.use(function (req, res, next) {

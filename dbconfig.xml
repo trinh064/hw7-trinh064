@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <dbconfig>
+  <connectionlimit>100</connectionlimit>
   <host>us-cdbr-east-03.cleardb.com</host>
   <user>b37fcec36530b3</user>
   <password>20aa747a</password>

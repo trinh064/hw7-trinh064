@@ -97,26 +97,26 @@ $.get("/api/getuser",
     function(data,status){
     console.log(data);
     document.getElementById("uname").innerHTML="Welcome "+data;
-    }); 
+    });
 function createGraph(companyname,obj){
 
-label= Object.keys(obj);
+label= Object.keys(obj).reverse();
 valuelist=Object.values(obj);
 var i=0;
 values=[];
-for (i=0;i<valuelist.length;i++){values.push(valuelist[i]["2. high"]);}
+for (i=valuelist.length-1;i>=0;i--){values.push(valuelist[i]["2. high"]);}
 //console.log(valuelist[0]["5. volume"]);
 var ctx = document.getElementById('myCanvas').getContext('2d');
 
 var myLineChart = new Chart(ctx, {
     type: 'line',
-    data:{ labels: label, datasets:[{label:companyname,data:values}]} 
+    data:{ labels: label, datasets:[{label:companyname,data:values}]}
 })
 
 ;}
   async function getData(){
   link="https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=XXX&apikey=2CN5CTK5P0CSAKR6";
- 
+
   link=link.replace('XXX',document.getElementsByName('Company')[0].value);
    console.log(link);
   const response = await fetch(link);
@@ -124,13 +124,13 @@ var myLineChart = new Chart(ctx, {
 	graphdata= obj["Time Series (Daily)"];
 	companyname=document.getElementsByName('Company')[0].value;
   createGraph(companyname,graphdata);
-	var meta="";  
+	var meta="";
   meta+='<tr>';
-	meta+='<td>'+ JSON.stringify(obj["Meta Data"],null,2)+'</td>';
-	meta+='<td>'+ JSON.stringify(obj["Time Series (Daily)"],null,2).substring(0,200)+'</td>';
+	meta+='<td>'+ '<textarea>'+JSON.stringify(obj["Meta Data"],null,2)+'</textarea>'+'</td>';
+	meta+='<td>'+ '<textarea>'+JSON.stringify(obj["Time Series (Daily)"],null,2).substring(0,200)+'</textarea>'+'</td>';
 	meta+='</tr>';
 		document.getElementsByTagName("tbody")[1].innerHTML=meta;
-  // do something with myJson 
+  // do something with myJson
   console.log(obj);
    }
   </script>
