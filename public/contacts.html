@@ -13,7 +13,7 @@
   border: 1px solid white;
   height: 12px;
   width: 60px;
- 
+
   }
 
   </style>
@@ -33,7 +33,7 @@
     </nav>
     <br><br>
     <button type="button" onclick="addContact()" style="margin-left:350px">+ Add Contact</button>
-    
+
     <span class="fail"></span>
     <div class="container">
       <table class="table" id="contactsTable">
@@ -48,7 +48,7 @@
             <th scope="col">Management</th>
           </tr>
         </thead>
-        <tbody><tr><td>aaaaaaa</td></tr></tbody>
+        <tbody><tr><td></td></tr></tbody>
       </table>
     </div>
     <script type="text/javascript">
@@ -69,7 +69,7 @@ var doc="";
       var obj = JSON.parse(res);
       var i;
       for (i=0;i<obj.length;i++){
-     
+
 		doc+='<tr id=\''+obj[i].name+'\' >';
 		doc+='<td>'+ obj[i].name+'</td>';
 		doc+='<td>'+ obj[i].category+'</td>';
@@ -82,51 +82,51 @@ var doc="";
 		//doc+='<td>'+ obj[i].website_url+'</td>';
  		doc+='</tr>';
 		}
-		
+
 		document.getElementsByTagName("tbody")[0].innerHTML=doc;
-		//$("#contactsTable > tbody").text(doc);	
+		//$("#contactsTable > tbody").text(doc);
    }}
 $.get("/api/getuser",
     {},
     function(data,status){
     console.log(data);
     document.getElementById("uname").innerHTML="Welcome "+data;
-    }); 
- 
-var canadd=1;   
+    });
+
+var canadd=1;
 var canedit=1;
 
 function addContact () {
 if(canadd)
 	{body=document.getElementsByTagName("tbody")[0].innerHTML;
 
-	var add='<tr id=\'newcontact\'>' +            
+	var add='<tr id=\'newcontact\'>' +
                     '<td> '+
                         '<input type=\"text\" class=\"form-control\" name=\"name\" required>'+
-                    '</td>'+                  
-                    '<td>' +                    
+                    '</td>'+
+                    '<td>' +
                           '<select class=\"form-control\" name=\"category\">'+
                               '<option>Personal</option>'+
                               '<option>Academic</option>'+
                               '<option>Industry</option>'+
                           '</select>'+
-                    '</td>'+                  
-                    '<td>'+                   
-                        '<input type=\"text\" class=\"form-control\" name=\"location\" required>'+                     
-                    '</td>'+               
-                    '<td>'+                     
-                        '<input type=\"text\" class=\"form-control\" name=\"contact\" required>'+                    
-                    '</td>'+                 
-                    '<td >'+                    
-                        '<input type=\"email\" class=\"form-control\" name=\"email\" required>'+                  
                     '</td>'+
-                    '<td>'+                     
-                        '<input type=\"text\" class=\"form-control\" name=\"website_url\" required>'+                   
+                    '<td>'+
+                        '<input type=\"text\" class=\"form-control\" name=\"location\" required>'+
+                    '</td>'+
+                    '<td>'+
+                        '<input type=\"text\" class=\"form-control\" name=\"contact\" required>'+
+                    '</td>'+
+                    '<td >'+
+                        '<input type=\"email\" class=\"form-control\" name=\"email\" required>'+
+                    '</td>'+
+                    '<td>'+
+                        '<input type=\"text\" class=\"form-control\" name=\"website_url\" required>'+
                     '<td>'+ "<button type=\"button\" onclick=\"postContacts( )\">Save</button>" +"<button type=\"button\" onclick=\"canceledit()\">Cancel</button>" +'</td>'
                   '</tr>'
                   ;
      document.getElementsByTagName("tbody")[0].innerHTML=body+add; canadd=0;}
-	
+
 }
 function postContacts(){
 
@@ -157,11 +157,11 @@ $.post("/api/postContactEntry",
     function(data,status){
     console.log(data);
     if(data=="name existed"){document.getElementsByClassName("fail")[0].innerHTML="Error! Name of contact cannot be duplicated";}
-    else{ 
+    else{
     window.location.replace("/contacts");
     }
     });
-    
+
 
 }
 
@@ -181,7 +181,7 @@ $.post("/api/delete",
             }
     });
 
-} 
+}
 var oldname=""
 function editContact(ctname){
 contact=decodeURIComponent(ctname);
@@ -220,7 +220,7 @@ newhtml+="</td>";
 newhtml+='<td>'+ "<button type=\"button\" onclick=update(\'" + encodeURIComponent(contact) + "\')>Save</button>";
 newhtml+= "<button type=\"button\" onclick=canceledit()>Cancel</button>" +'</td>';
 obj.innerHTML=newhtml;}
-} 
+}
 function checkemail (email) {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)
 }
@@ -252,7 +252,7 @@ $.post("/api/updateentry",
     function(data,status){
       window.location.replace("/contacts");
     });
-  
+
 }
 function canceledit(){
 canedit=1;
