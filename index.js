@@ -44,7 +44,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 //app.use(express.json());
 app.use(bodyparser.urlencoded({extended: true}));
 app.use(bodyparser.json());
-// server listens on port 9002 for incoming connections
+// server listens on port 9001 for incoming connections
 app.listen(port, () => console.log('Listening on port', port));
 
 app.get('/', function (req, res) {
