@@ -24,7 +24,7 @@ const bcrypt = require('bcrypt');
 // Include the express router. 
 const utilities = require('./api/utilities');
 
-const port = 5000;
+const PORT = process.env.PORT || 5000
 
 // create an express application
 const app = express();
